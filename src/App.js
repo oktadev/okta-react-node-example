@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import { ImplicitCallback } from '@okta/okta-react';
+import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
 import {
   CssBaseline,
   withStyles,
@@ -8,6 +8,7 @@ import {
 
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
+import PostsManager from './pages/PostsManager';
 
 const styles = theme => ({
   main: {
@@ -24,6 +25,7 @@ const App = ({ classes }) => (
     <AppHeader />
     <main className={classes.main}>
       <Route exact path="/" component={Home} />
+      <SecureRoute exact path="/posts" component={PostsManager} />
       <Route path="/implicit/callback" component={ImplicitCallback} />
     </main>
   </Fragment>
