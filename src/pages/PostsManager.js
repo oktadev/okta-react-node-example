@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { withAuth } from '@okta/okta-react';
+import { withRouter, Route, Redirect, Link } from 'react-router-dom';
 import {
   withStyles,
   Typography,
+  Button,
   IconButton,
   Paper,
   List,
@@ -10,10 +12,12 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
+import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import moment from 'moment';
-import { orderBy } from 'lodash';
+import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
+
+import PostEditor from '../components/PostEditor';
 
 const styles = theme => ({
   posts: {
@@ -42,11 +46,14 @@ class PostsManager extends Component {
     this.getPosts();
   }
 
-  async fetch(method, endpoint) {
+  async fetch(method, endpoint, body) {
     try {
       const response = await fetch(`${API}${endpoint}`, {
         method,
+        body: body && JSON.stringify(body),
         headers: {
+          'content-type': 'application/json',
+          accept: 'application/json',
           authorization: `Bearer ${await this.props.auth.getAccessToken()}`,
         },
       });
@@ -60,13 +67,14 @@ class PostsManager extends Component {
     this.setState({ loading: false, posts: await this.fetch('get', '/posts') });
   }
 
-  async createPost(post) {
-    await this.fetch('post', '/posts', post);
-    this.getPosts();
-  }
+  savePost = async (post) => {
+    if (post.id) {
+      await this.fetch('put', `/posts/${post.id}`, post);
+    } else {
+      await this.fetch('post', '/posts', post);
+    }
 
-  async updatePost(id, post) {
-    await this.fetch('patch', `/posts/${id}`, post);
+    this.props.history.goBack();
     this.getPosts();
   }
 
@@ -76,6 +84,15 @@ class PostsManager extends Component {
       this.getPosts();
     }
   }
+
+  renderPostEditor = ({ match: { params: { id } } }) => {
+    if (this.state.loading) return null;
+    const post = find(this.state.posts, { id: Number(id) });
+
+    if (!post && id !== 'new') return <Redirect to="/posts" />;
+
+    return <PostEditor post={post} onSave={this.savePost} />;
+  };
 
   render() {
     const { classes } = this.props;
@@ -87,7 +104,7 @@ class PostsManager extends Component {
           <Paper elevation={1} className={classes.posts}>
             <List>
               {orderBy(this.state.posts, ['updatedAt', 'title'], ['desc', 'asc']).map(post => (
-                <ListItem key={post.id} button>
+                <ListItem key={post.id} button component={Link} to={`/posts/${post.id}`}>
                   <ListItemText
                     primary={post.title}
                     secondary={post.updatedAt && `Updated ${moment(post.updatedAt).fromNow()}`}
@@ -102,8 +119,19 @@ class PostsManager extends Component {
             </List>
           </Paper>
         ) : (
-          <Typography variant="subheading">No posts to display</Typography>
+          !this.state.loading && <Typography variant="subheading">No posts to display</Typography>
         )}
+        <Button
+          variant="fab"
+          color="secondary"
+          aria-label="add"
+          className={classes.fab}
+          component={Link}
+          to="/posts/new"
+        >
+          <AddIcon />
+        </Button>
+        <Route exact path="/posts/:id" render={this.renderPostEditor} />
       </Fragment>
     );
   }
@@ -111,5 +139,6 @@ class PostsManager extends Component {
 
 export default compose(
   withAuth,
+  withRouter,
   withStyles(styles),
 )(PostsManager);
