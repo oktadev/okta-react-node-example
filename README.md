@@ -4,7 +4,7 @@ This example app shows how to create a Node.js API and display its data with a R
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-**Prerequisites**: [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/lang/en/).
+**Prerequisites**: [Node.js](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/lang/en/), and [SQLite](https://www.sqlite.org/index.html).
 
 ## Getting Started
 

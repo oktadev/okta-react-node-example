@@ -22,7 +22,7 @@
     "react-scripts": "1.1.4",
     "recompose": "^0.27.1",
     "sequelize": "^4.38.0",
-    "sqlite": "^2.9.2"
+    "sqlite3": "^4.0.4"
   },
   "scripts": {
     "start": "npm-run-all --parallel watch:server start:web",
@@ -34,6 +34,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "nodemon": "^1.18.8",
     "npm-run-all": "^4.1.3"
   }
 }
