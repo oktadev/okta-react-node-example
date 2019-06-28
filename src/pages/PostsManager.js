@@ -18,6 +18,7 @@ import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 
 import PostEditor from '../components/PostEditor';
+import ErrorSnackbar from '../components/ErrorSnackbar';
 
 const styles = theme => ({
   posts: {
@@ -40,6 +41,7 @@ class PostsManager extends Component {
   state = {
     loading: true,
     posts: [],
+    error: null,
   };
 
   componentDidMount() {
@@ -60,11 +62,13 @@ class PostsManager extends Component {
       return await response.json();
     } catch (error) {
       console.error(error);
+
+      this.setState({ error });
     }
   }
 
   async getPosts() {
-    this.setState({ loading: false, posts: await this.fetch('get', '/posts') });
+    this.setState({ loading: false, posts: (await this.fetch('get', '/posts')) || [] });
   }
 
   savePost = async (post) => {
@@ -132,6 +136,12 @@ class PostsManager extends Component {
           <AddIcon />
         </Button>
         <Route exact path="/posts/:id" render={this.renderPostEditor} />
+        {this.state.error && (
+          <ErrorSnackbar
+            onClose={() => this.setState({ error: null })}
+            message={this.state.error.message}
+          />
+        )}
       </Fragment>
     );
   }
