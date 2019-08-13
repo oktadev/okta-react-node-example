@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 To install this example application, run the following commands:
 
 ```bash
-git clone git@github.com:oktadeveloper/okta-react-node-example.git
+git clone https://github.com/oktadeveloper/okta-react-node-example.git
 cd okta-react-node-example
 yarn
 ```
