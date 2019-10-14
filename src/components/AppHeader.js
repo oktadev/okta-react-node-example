@@ -19,7 +19,7 @@ const styles = {
 const AppHeader = ({ classes }) => (
   <AppBar position="static">
     <Toolbar>
-      <Typography variant="title" color="inherit">
+      <Typography variant="h6" color="inherit">
         My React App
       </Typography>
       <Button color="inherit" component={Link} to="/">Home</Button>

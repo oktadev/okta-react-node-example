@@ -103,7 +103,7 @@ class PostsManager extends Component {
 
     return (
       <Fragment>
-        <Typography variant="display1">Posts Manager</Typography>
+        <Typography variant="h4">Posts Manager</Typography>
         {this.state.posts.length > 0 ? (
           <Paper elevation={1} className={classes.posts}>
             <List>
@@ -123,7 +123,7 @@ class PostsManager extends Component {
             </List>
           </Paper>
         ) : (
-          !this.state.loading && <Typography variant="subheading">No posts to display</Typography>
+          !this.state.loading && <Typography variant="subtitle1">No posts to display</Typography>
         )}
         <Fab
           color="secondary"
