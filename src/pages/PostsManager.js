@@ -4,7 +4,6 @@ import { withRouter, Route, Redirect, Link } from 'react-router-dom';
 import {
   withStyles,
   Typography,
-  Button,
   IconButton,
   Paper,
   List,
@@ -12,6 +11,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import moment from 'moment';
 import { find, orderBy } from 'lodash';
@@ -125,8 +125,7 @@ class PostsManager extends Component {
         ) : (
           !this.state.loading && <Typography variant="subheading">No posts to display</Typography>
         )}
-        <Button
-          variant="fab"
+        <Fab
           color="secondary"
           aria-label="add"
           className={classes.fab}
@@ -134,7 +133,7 @@ class PostsManager extends Component {
           to="/posts/new"
         >
           <AddIcon />
-        </Button>
+        </Fab>
         <Route exact path="/posts/:id" render={this.renderPostEditor} />
         {this.state.error && (
           <ErrorSnackbar
