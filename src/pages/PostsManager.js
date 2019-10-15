@@ -22,15 +22,15 @@ import ErrorSnackbar from '../components/ErrorSnackbar';
 
 const styles = theme => ({
   posts: {
-    marginTop: 2 * theme.spacing.unit,
+    marginTop: theme.spacing(2),
   },
   fab: {
     position: 'absolute',
-    bottom: 3 * theme.spacing.unit,
-    right: 3 * theme.spacing.unit,
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
     [theme.breakpoints.down('xs')]: {
-      bottom: 2 * theme.spacing.unit,
-      right: 2 * theme.spacing.unit,
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
     },
   },
 });

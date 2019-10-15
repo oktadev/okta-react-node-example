@@ -27,7 +27,7 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   marginTop: {
-    marginTop: 2 * theme.spacing.unit,
+    marginTop: theme.spacing(2),
   },
 });
 
