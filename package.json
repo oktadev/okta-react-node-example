@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
-    "@okta/jwt-verifier": "^0.0.12",
+    "@okta/jwt-verifier": "^1.0.0",
     "@okta/okta-react": "^1.0.2",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
