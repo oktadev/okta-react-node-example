@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Basic CRUD App with Node + React
 
-## Available Scripts
+This example app shows how to create a Node.js API and display its data with a React UI. To follow along step-by-step, [check out the blog post](https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react).
 
-In the project directory, you can run:
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-### `npm start`
+**Prerequisites**: [Node.js](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/lang/en/), and [SQLite](https://www.sqlite.org/index.html).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To install this example application, run the following commands:
 
-### `npm test`
+```bash
+git clone https://github.com/oktadeveloper/okta-react-node-example.git
+cd okta-react-node-example
+yarn
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This will get a copy of the project install locally. You will need to set up some environment variables before the app will run properly.
 
-### `npm run build`
+To integrate Okta's Identity Platform for user authentication, you'll first need to:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* [Sign up for a free Okta Developer account](https://www.okta.com/developer/signup/)
+* You will get a URL similar to `https://dev-123456.oktapreview.com`.
+  * Save this URL for later
+  * You will also use this URL to login to your Okta account
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+You will need to create an application in Okta:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Log in to your Okta account, then navigate to **Applications** and click the **Add Application** button
+* Select **Single-Page App** and click **Next**
+* Give your application a name (e.g. "My React App")
+* Change the **Base URI** to `http://localhost:3000/` and the **Login redirect URI** to `http://localhost:3000/implicit/callback`, then click **Done**
+* Save your **Client ID** for later
 
-### `npm run eject`
+Your Okta application should have settings similar to the following:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Okta Application Settings](images/okta-app-settings.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Now create a file called `.env.local` in the project root and add the following variables, replacing the values with your own from the previous steps.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**.env.local**
+```bash
+REACT_APP_OKTA_CLIENT_ID={yourClientId}
+REACT_APP_OKTA_ORG_URL=https://{yourOktaOrgUrl}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Now you can run both the Node API server and the React frontend with the same command:
 
-## Learn More
+```bash
+yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Links
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This example uses the following libraries provided by Okta:
 
-### Code Splitting
+* [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier)
+* [Okta React SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Help
 
-### Analyzing the Bundle Size
+Please [raise an issue](https://github.com/oktadeveloper/okta-react-node-example/issues) if you find a problem with the example application, or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email [developers@okta.com](mailto:developers@okta.com) if would like to create a support ticket.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## License
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Apache 2.0, see [LICENSE](LICENSE).
