@@ -4,7 +4,6 @@ import { withRouter, Route, Redirect, Link } from 'react-router-dom';
 import {
   withStyles,
   Typography,
-  Button,
   IconButton,
   Paper,
   List,
@@ -12,6 +11,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import moment from 'moment';
 import { find, orderBy } from 'lodash';
@@ -22,15 +22,15 @@ import ErrorSnackbar from '../components/ErrorSnackbar';
 
 const styles = theme => ({
   posts: {
-    marginTop: 2 * theme.spacing.unit,
+    marginTop: theme.spacing(2),
   },
   fab: {
     position: 'absolute',
-    bottom: 3 * theme.spacing.unit,
-    right: 3 * theme.spacing.unit,
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
     [theme.breakpoints.down('xs')]: {
-      bottom: 2 * theme.spacing.unit,
-      right: 2 * theme.spacing.unit,
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
     },
   },
 });
@@ -103,7 +103,7 @@ class PostsManager extends Component {
 
     return (
       <Fragment>
-        <Typography variant="display1">Posts Manager</Typography>
+        <Typography variant="h4">Posts Manager</Typography>
         {this.state.posts.length > 0 ? (
           <Paper elevation={1} className={classes.posts}>
             <List>
@@ -123,10 +123,9 @@ class PostsManager extends Component {
             </List>
           </Paper>
         ) : (
-          !this.state.loading && <Typography variant="subheading">No posts to display</Typography>
+          !this.state.loading && <Typography variant="subtitle1">No posts to display</Typography>
         )}
-        <Button
-          variant="fab"
+        <Fab
           color="secondary"
           aria-label="add"
           className={classes.fab}
@@ -134,7 +133,7 @@ class PostsManager extends Component {
           to="/posts/new"
         >
           <AddIcon />
-        </Button>
+        </Fab>
         <Route exact path="/posts/:id" render={this.renderPostEditor} />
         {this.state.error && (
           <ErrorSnackbar
