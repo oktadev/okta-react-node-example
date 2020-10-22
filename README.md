@@ -30,7 +30,7 @@ You will need to create an application in Okta:
 * Log in to your Okta account, then navigate to **Applications** and click the **Add Application** button
 * Select **Single-Page App** and click **Next**
 * Give your application a name (e.g. "My React App")
-* Change the **Base URI** to `http://localhost:3000/` and the **Login redirect URI** to `http://localhost:3000/implicit/callback`, then click **Done**
+* Change the **Base URI** to `http://localhost:3000/` and the **Login redirect URI** to `http://localhost:3000/login/callback`, then click **Done**
 * Save your **Client ID** for later
 
 Your Okta application should have settings similar to the following:
