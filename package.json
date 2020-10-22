@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
     "@okta/jwt-verifier": "^1.0.0",
-    "@okta/okta-react": "^1.0.2",
+    "@okta/okta-react": "^3.0.8",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "^8.1.0",

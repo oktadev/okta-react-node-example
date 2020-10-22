@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
-import { withAuth } from '@okta/okta-react';
+import { withOktaAuth } from '@okta/okta-react';
 
 class LoginButton extends Component {
   state = {
@@ -25,17 +25,17 @@ class LoginButton extends Component {
   }
 
   async checkAuthentication() {
-    const authenticated = await this.props.auth.isAuthenticated();
+    const authenticated = this.props.authState.isAuthenticated;
     if (authenticated !== this.state.authenticated) {
-      const user = await this.props.auth.getUser();
+      const user = await this.props.authService.getUser();
       this.setState({ authenticated, user });
     }
   }
 
-  login = () => this.props.auth.login();
+  login = () => this.props.authService.login('/');
   logout = () => {
     this.handleMenuClose();
-    this.props.auth.logout();
+    this.props.authService.logout('/');
   };
 
   handleMenuOpen = event => this.setState({ menuAnchorEl: event.currentTarget });
@@ -76,4 +76,4 @@ class LoginButton extends Component {
   }
 }
 
-export default withAuth(LoginButton);
+export default withOktaAuth(LoginButton);

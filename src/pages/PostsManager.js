@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withAuth } from '@okta/okta-react';
+import { withOktaAuth } from '@okta/okta-react';
 import { withRouter, Route, Redirect, Link } from 'react-router-dom';
 import {
   withStyles,
@@ -56,7 +56,7 @@ class PostsManager extends Component {
         headers: {
           'content-type': 'application/json',
           accept: 'application/json',
-          authorization: `Bearer ${await this.props.auth.getAccessToken()}`,
+          authorization: `Bearer ${await this.props.authService.getAccessToken()}`,
         },
       });
       return await response.json();
@@ -147,7 +147,7 @@ class PostsManager extends Component {
 }
 
 export default compose(
-  withAuth,
+  withOktaAuth,
   withRouter,
   withStyles(styles),
 )(PostsManager);
