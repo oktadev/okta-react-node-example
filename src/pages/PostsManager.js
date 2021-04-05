@@ -79,13 +79,13 @@ class PostsManager extends Component {
     }
 
     this.props.history.goBack();
-    this.getPosts();
+    await this.getPosts();
   }
 
   async deletePost(post) {
     if (window.confirm(`Are you sure you want to delete "${post.title}"`)) {
       await this.fetch('delete', `/posts/${post.id}`);
-      this.getPosts();
+      await this.getPosts();
     }
   }
 
