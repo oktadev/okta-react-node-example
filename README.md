@@ -18,31 +18,28 @@ yarn
 
 This will get a copy of the project install locally. You will need to set up some environment variables before the app will run properly.
 
-To integrate Okta's Identity Platform for user authentication, you'll first need to:
+Before you begin, you'll need a free Okta developer account. Install the [Okta CLI](https://cli.okta.com/) and run `okta register` to sign up for a new account. If you already have an account, run `okta login`.
 
-* [Sign up for a free Okta Developer account](https://www.okta.com/developer/signup/)
-* You will get a URL similar to `https://dev-123456.oktapreview.com`.
-  * Save this URL for later
-  * You will also use this URL to login to your Okta account
+Then, run `okta apps create`. Select the default app name, or change it as you see fit. Choose **Single-Page App** and press **Enter**.
 
-You will need to create an application in Okta:
+Change the Redirect URI to `http://localhost:3000/login/callback` and accept the default Logout Redirect URI of `http://localhost:3000`.
 
-* Log in to your Okta account, then navigate to **Applications** and click the **Add Application** button
-* Select **Single-Page App** and click **Next**
-* Give your application a name (e.g. "My React App")
-* Change the **Base URI** to `http://localhost:3000/` and the **Login redirect URI** to `http://localhost:3000/login/callback`, then click **Done**
-* Save your **Client ID** for later
+The Okta CLI will create an OIDC Single-Page App in your Okta Org. It will add the redirect URIs you specified and grant access to the Everyone group. It will also add a trusted origin for `http://localhost:3000`. You will see output like the following when it's finished:
 
-Your Okta application should have settings similar to the following:
+```
+Okta application configuration:
+Issuer:    https://dev-133337.okta.com/oauth2/default
+Client ID: 0oab8eb55Kb9jdMIr5d6
+```
 
-![Okta Application Settings](images/okta-app-settings.png)
+NOTE: You can also use the Okta Admin Console to create your app. See [Create a React App](https://developer.okta.com/docs/guides/sign-into-spa/react/create-okta-application/) for more information.
 
-Now create a file called `.env.local` in the project root and add the following variables, replacing the values with your own from the previous steps.
+Now create a file called `.env.local` in the project root and add the following variables, replacing the values with your own from the previous steps. Your Okta domain is the first part of your issuer, before `/oauth2/default`.
 
 **.env.local**
 ```bash
 REACT_APP_OKTA_CLIENT_ID={yourClientId}
-REACT_APP_OKTA_ORG_URL=https://{yourOktaOrgUrl}
+REACT_APP_OKTA_ORG_URL={yourOktaOrgUrl}
 ```
 
 Now you can run both the Node API server and the React frontend with the same command:
@@ -56,11 +53,11 @@ yarn start
 This example uses the following libraries provided by Okta:
 
 * [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier)
-* [Okta React SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react)
+* [Okta React SDK](https://github.com/okta/okta-react)
 
 ## Help
 
-Please [raise an issue](https://github.com/oktadeveloper/okta-react-node-example/issues) if you find a problem with the example application, or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email [developers@okta.com](mailto:developers@okta.com) if would like to create a support ticket.
+Please [raise an issue](https://github.com/oktadeveloper/okta-react-node-example/issues) if you find a problem with the example application, or visit our [Okta Developer Forums](https://devforum.okta.com/).
 
 ## License
 

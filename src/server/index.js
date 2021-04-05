@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
-const epilogue = require('epilogue');
+const finale = require('finale-rest');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
@@ -38,9 +38,9 @@ const Post = database.define('posts', {
   body: Sequelize.TEXT,
 });
 
-epilogue.initialize({ app, sequelize: database });
+finale.initialize({ app, sequelize: database });
 
-epilogue.resource({
+finale.resource({
   model: Post,
   endpoints: ['/posts', '/posts/:id'],
 });
