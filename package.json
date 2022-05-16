@@ -22,7 +22,7 @@
     "react-scripts": "^3.2.0",
     "recompose": "^0.30.0",
     "sequelize": "6.6.2",
-    "sqlite3": "5.0.2",
+    "sqlite3": "5.0.3",
     "uuid": "^3.3.2"
   },
   "scripts": {
